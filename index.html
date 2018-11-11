@@ -35,6 +35,10 @@
                 channel: null,
                 chatOpen: false
             }
+            var streamersParam = new URLSearchParams(window.location.search).get('streamers');
+            if(streamersParam !== null && typeof streamersParam.split('|')[i] !== 'undefined' && streamersParam.split('|')[i].length > 0) {
+                data.gridSpots[i].channel = streamersParam.split('|')[i];
+            }
         }
     }
     
