@@ -1,0 +1,45 @@
+<head>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    
+</head>
+
+<body>
+    <div id="app">
+        <div class="stream-grid">
+            <div v-for="gridSpot in gridSpots" v-bind:class="`grid-spot ${gridSpot.channel === null ? 'empty' : ''}`" v-on:click="if(gridSpot.channel === null){gridSpot.channel = prompt('Channel name')}">
+                <div v-if="gridSpot.channel !== null" class="stream-options">
+                    <span v-on:click="gridSpot.channel = prompt('Channel name')">Change streamer</span>
+                    <span v-on:click="gridSpot.chatOpen = !gridSpot.chatOpen">{{gridSpot.chatOpen ? 'Hide' : 'Show'}} chat</span>
+                </div>
+                <iframe class="stream-embed" v-if="gridSpot.channel !== null" v-show="!gridSpot.chatOpen" v-bind:src="`https://player.twitch.tv/?channel=${gridSpot.channel}`" frameborder="0" allowfullscreen="true" scrolling="no"></iframe>
+                <iframe class="chat-embed" v-if="gridSpot.channel !== null" v-show="gridSpot.chatOpen" v-bind:src="`https://www.twitch.tv/embed/${gridSpot.channel}/chat`" frameborder="0" scrolling="no"></iframe>
+                <i v-if="gridSpot.channel === null" class="fa fa-plus-square add-channel-button"></i>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script>
+    var data = {
+        gridSpots: []
+    };
+    
+    if(data.gridSpots.length !== 9) {
+        for(var i = 0; i < 9; i++) {
+            data.gridSpots[i] = {
+                channel: null,
+                chatOpen: false
+            }
+        }
+    }
+    
+    var vm = new Vue({
+        el: '#app',
+        data: data
+    });
+</script>

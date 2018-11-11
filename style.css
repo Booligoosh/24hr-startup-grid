@@ -1,0 +1,69 @@
+* {
+    box-sizing: border-box;
+    transition: all .15s ease-in-out;
+}
+
+body {
+    margin: 0;
+    background: #2f3436;
+    color: #eaebeb;
+    font-family: system-ui, sans-serif;
+}
+
+.stream-grid {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: calc((100% - 2px)/3) calc((100% - 2px)/3) calc((100% - 2px)/3);
+    grid-template-rows: calc((100% - 2px)/3) calc((100% - 2px)/3) calc((100% - 2px)/3);
+    grid-gap: 1px;
+    background: #eaebeb;
+}
+
+.grid-spot {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #2f3436;
+}
+
+.grid-spot iframe {
+    height: 100%;
+    width: 100%;
+}
+
+.grid-spot.empty {
+    cursor: pointer;
+}
+
+.add-channel-button {
+    font-size: 3em;
+    cursor: pointer;
+}
+
+.stream-options {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .8em;
+    padding: 0.5em;
+    background: #2f3436;
+}
+
+.grid-spot:hover .stream-options {
+    opacity: 1;
+    pointer-events: initial;
+}
+
+.stream-options * {
+    cursor: pointer;
+}
