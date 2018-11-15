@@ -14,8 +14,8 @@ body {
     height: 100vh;
     width: 100vw;
     display: grid;
-    grid-template-columns: calc((100% - 2px)/3) calc((100% - 2px)/3) calc((100% - 2px)/3);
-    grid-template-rows: calc((100% - 2px)/3) calc((100% - 2px)/3) calc((100% - 2px)/3);
+    grid-template-columns: repeat(var(--columns), calc((100% - (1px * (var(--columns) - 1)))/var(--columns)));
+    grid-template-rows: repeat(var(--rows), calc((100% - (1px * (var(--rows) - 1)))/var(--rows)));
     grid-gap: 1px;
     background: #eaebeb;
 }

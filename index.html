@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" v-bind:style="`--rows: ${rows}; --columns: ${columns}`">
         <div class="stream-grid">
             <div v-for="gridSpot in gridSpots" v-bind:class="`grid-spot ${gridSpot.channel === null ? 'empty' : ''}`" v-on:click="if(gridSpot.channel === null){gridSpot.channel = prompt('Channel name')}">
                 <div v-if="gridSpot.channel !== null" class="stream-options">
@@ -26,11 +26,22 @@
 
 <script>
     var data = {
-        gridSpots: []
+        gridSpots: [],
+        rows: 3,
+        columns: 3
     };
     
-    if(data.gridSpots.length !== 9) {
-        for(var i = 0; i < 9; i++) {
+    var rowsParam = new URLSearchParams(window.location.search).get('rows');
+    if(rowsParam !== null && Number(rowsParam) !== NaN) {
+        data.rows = Number(rowsParam);
+    }
+    var columnsParam = new URLSearchParams(window.location.search).get('columns');
+    if(columnsParam !== null && Number(columnsParam) !== NaN) {
+        data.columns = Number(columnsParam);
+    }
+    
+    if(data.gridSpots.length !== data.rows * data.columns) {
+        for(var i = 0; i < data.rows * data.columns; i++) {
             data.gridSpots[i] = {
                 channel: null,
                 chatOpen: false
